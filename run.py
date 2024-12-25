@@ -1,40 +1,42 @@
 import csv
-from pytube import YouTube
+from pytubefix import YouTube
 from youtube_search import YoutubeSearch
 import json
-import re
 
 
-def download(search_query):
-    try:
+
+def downloadsong(search_query, path):
+    try: 
         youtube_results = YoutubeSearch(search_query, max_results=1).to_json()
         youtube_first_video = json.loads(youtube_results)['videos'][0]
         url = "https://www.youtube.com" + youtube_first_video['url_suffix']
         name = youtube_first_video['title']
-        youtube_video = YouTube(url)
-        youtube_video_streams = youtube_video.streams.filter(only_audio=True, file_extension='mp4')
-        print("Downloading " + name)
-        correctIndex = 0
 
-        selected_bitrate_normalised = 160000 / 1000
-
-        for i,vid in enumerate(youtube_video_streams):
-            currKbps = int(re.sub("[^0-9]", "", vid.abr))
-            if currKbps < selected_bitrate_normalised:
-                correctIndex = i
-
-        video_stream = youtube_video_streams[correctIndex]
-
-        video_stream.download(output_path="./music/", filename=name+".mp4")
+    
+        # object creation using YouTube 
+        yt = YouTube(url) 
+        d_video=yt.streams.get_audio_only()
+    except: 
+        #to handle exception 
+        print("Connection Error") 
 
 
-    except:
-        print("Error")
+
+    try: 
+        # downloading the video 
+        d_video.download(output_path="./music/"+path+"/", filename=name+".mp4")
+        print(search_query)
+    except: 
+        print("Some Error in " + search_query)
+            
+        
+
+
 
 while True:
 
 
-    print("Select operation: \n 1. Download from spotify playlist. \n 2. Search by name.")
+    print("Select option: \n 1. Download from spotify playlist. \n 2. Search by name.")
     mode = int(input("-> "))
 
     if mode == 1:
@@ -61,12 +63,15 @@ while True:
         print(len(songs))
 
         for a in songs:
-            search_string=a + " from " + artist[x]
-            download(search_string)
-            x=x+1
+            try: 
+                search_string=a + " - " + artist[x]
+                downloadsong(search_string, "artists/"+artist[x])
+                x=x+1
+            except:
+                print("We are cooked!!!!")
     elif mode == 2:
         print("Enter the name")
-        download(input("-> "))
+        downloadsong(input("-> "),"downloads")
         print("Finished\n\n")
 
     else:
