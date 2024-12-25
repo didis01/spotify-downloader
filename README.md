@@ -3,5 +3,6 @@ This python script allows you to search and download music from youtube. It also
 
 # Requeriments
 It needs the following requeriments:
+\n
 pytubefix
 youtube_search
