@@ -36,43 +36,49 @@ def downloadsong(search_query, path):
 while True:
 
 
-    print("Select option: \n 1. Download from spotify playlist. \n 2. Search by name.")
-    mode = int(input("-> "))
+    print("Select option: \n 1. Download from spotify playlist. \n 2. Search by name. \n 3. Exit.")
+    try:
+        mode = int(input("-> "))
 
-    if mode == 1:
-        print("Enter your .csv file name")
-        name = input("-> ")
-        songs=[]
-        artist=[]
-        x=0
+        if mode == 1:
+            print("Enter your .csv file name")
+            name = input("-> ")
+            songs=[]
+            artist=[]
+            x=0
 
-        with open(name, 'r', encoding='utf-8') as rf:
-            reader = csv.reader(rf, delimiter=',')
-            for row in reader:
-                artist.append(row[3])
-            del artist[0]
-            rf.close()
+            with open(name, 'r', encoding='utf-8') as rf:
+                reader = csv.reader(rf, delimiter=',')
+                for row in reader:
+                    artist.append(row[3])
+                del artist[0]
+                rf.close()
 
-        with open(name, 'r', encoding='utf-8') as rf1:
-            reader = csv.reader(rf1, delimiter=',')
-            for row in reader:
-                songs.append(row[1])
-            del songs[0]
-            rf1.close()
+            with open(name, 'r', encoding='utf-8') as rf1:
+                reader = csv.reader(rf1, delimiter=',')
+                for row in reader:
+                    songs.append(row[1])
+                del songs[0]
+                rf1.close()
 
-        print(len(songs))
+            print(len(songs))
 
-        for a in songs:
-            try: 
-                search_string=a + " - " + artist[x]
-                downloadsong(search_string, "artists/"+artist[x])
-                x=x+1
-            except:
-                print("We are cooked!!!!")
-    elif mode == 2:
-        print("Enter the name")
-        downloadsong(input("-> "),"downloads")
-        print("Done!\n\n")
+            for a in songs:
+                try: 
+                    search_string=a + " - " + artist[x]
+                    downloadsong(search_string, "artists/"+artist[x])
+                    x=x+1
+                except:
+                    print("We are cooked!!!!")
+        elif mode == 2:
+            print("Enter the name")
+            downloadsong(input("-> "),"downloads")
+            print("Done!\n\n")
 
-    else:
+        elif mode == 3:
+            exit("See ya!")
+
+        else:
+            print("Select something pls\n")
+    except:
         print("Select something pls\n")
