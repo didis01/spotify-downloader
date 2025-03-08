@@ -2,6 +2,7 @@ import csv
 from pytubefix import YouTube
 from youtube_search import YoutubeSearch
 import json
+from progress.bar import Bar
 
 
 
@@ -25,7 +26,7 @@ def downloadsong(search_query, path):
     try: 
         # downloading the video 
         d_video.download(output_path="./music/"+path+"/", filename=name+".mp4")
-        print(name)
+        print("\n"+name)
     except: 
         print("Some Error in " + search_query)
             
@@ -64,14 +65,18 @@ while True:
                 rf1.close()
 
             print(len(songs))
-
+            bar = Bar('Processing', max=len(songs))
             for a in songs:
                 try: 
                     search_string=a + " - " + artist[x]
                     downloadsong(search_string, "artists/"+artist[x])
                     x=x+1
+                    bar.next()
                 except:
                     print("We are cooked!!!!")
+
+            bar.finish()
+            print("Done!\n\n")
         elif mode == 2:
             print("Enter the name")
             downloadsong(input("-> "),"downloads")
