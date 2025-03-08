@@ -4,14 +4,14 @@ This python script allows you to search and download music from youtube. It also
 # Requeriments
 It needs the following dependencies:
 ```
-pytubefix
+pip install pytubefix
 ```
 ```
-youtube_search
+pip install youtube_search
 ```
 ```
-ffmpeg-python
+pip install ffmpeg-python
 ```
 ```
-progress
+pip install progress
 ```
