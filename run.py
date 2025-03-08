@@ -29,14 +29,16 @@ def downloadsong(search_query, path):
     except: 
         print("Some Error in " + search_query)
             
-        
+
+def stop():
+    exit("See ya!")
 
 
 
 while True:
 
 
-    print("Select option: \n 1. Download from spotify playlist. \n 2. Search by name. \n 3. Exit.")
+    print("Select option: \n 1. Download from spotify playlist. \n 2. Search by name.")
     try:
         mode = int(input("-> "))
 
@@ -74,9 +76,6 @@ while True:
             print("Enter the name")
             downloadsong(input("-> "),"downloads")
             print("Done!\n\n")
-
-        elif mode == 3:
-            exit("See ya!")
 
         else:
             print("Select something pls\n")
