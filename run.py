@@ -25,7 +25,7 @@ def downloadsong(search_query, path):
     try: 
         # downloading the video 
         d_video.download(output_path="./music/"+path+"/", filename=name+".mp4")
-        print(search_query)
+        print(name)
     except: 
         print("Some Error in " + search_query)
             
@@ -72,7 +72,7 @@ while True:
     elif mode == 2:
         print("Enter the name")
         downloadsong(input("-> "),"downloads")
-        print("Finished\n\n")
+        print("Done!\n\n")
 
     else:
         print("Select something pls\n")
