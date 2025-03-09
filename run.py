@@ -64,7 +64,7 @@ while True:
                 del songs[0]
                 rf1.close()
 
-            print(len(songs))
+            print("There are "+len(songs)+" songs in the playlist")
             bar = Bar('Processing', max=len(songs))
             for a in songs:
                 try: 
