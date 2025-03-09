@@ -26,7 +26,7 @@ def downloadsong(search_query, path):
     try: 
         # downloading the video 
         d_video.download(output_path="./music/"+path+"/", filename=name+".mp4")
-        print("\n"+name)
+        print("\n\n"+search_query)
     except: 
         print("Some Error in " + search_query)
             
@@ -69,7 +69,7 @@ while True:
             for a in songs:
                 try: 
                     search_string=a + " - " + artist[x]
-                    downloadsong(search_string, "artists/"+artist[x])
+                    downloadsong(search_string, " - "+artist[x])
                     x=x+1
                     bar.next()
                 except:
