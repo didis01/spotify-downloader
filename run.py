@@ -2,6 +2,7 @@ import csv
 from pytubefix import YouTube
 from youtube_search import YoutubeSearch
 import json
+import traceback
 from progress.bar import Bar
 
 
@@ -64,7 +65,7 @@ while True:
                 del songs[0]
                 rf1.close()
 
-            print("There are "+len(songs)+" songs in the playlist")
+            print("There are "+str(len(songs))+" songs in the playlist")
             bar = Bar('Processing', max=len(songs))
             for a in songs:
                 try: 
@@ -84,5 +85,6 @@ while True:
 
         else:
             print("Select something pls\n")
-    except:
-        print("Select something pls\n")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        traceback.print_exc()
